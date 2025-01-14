@@ -1,2 +1,0 @@
-# kaloryz-website
-Kaloryz website 
