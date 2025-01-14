@@ -4,96 +4,139 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kaloryz - Your Smart Nutrition Assistant</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        body {
+        * {
             margin: 0;
-            font-family: 'Poppins', sans-serif;
-            background: #f9f9f9;
-            color: #333;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            font-family: 'Montserrat', sans-serif;
+            background: #f4f4f4; /* Lighter background for a bright but not too harsh feel */
+            color: #333; /* Dark text for contrast */
+        }
+
+        /* Basic Layout */
+        body {
             display: flex;
             flex-direction: column;
-            min-height: 100vh;
-            overflow-x: hidden;  /* Prevent horizontal scrolling */
+            min-height: 100%;
         }
 
         header {
-            width: 100%;
+            position: sticky;
+            top: 0;
+            background: #fff;
             padding: 20px;
             text-align: center;
-            background: #ffffff;
-            border-bottom: 1px solid #ddd;
-            display: flex;
-            justify-content: center;  /* This ensures the title is horizontally centered */
+            z-index: 10;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
         header h1 {
             font-size: 2.5rem;
-            margin: 0;
-            color: #0078ff;
+            color: #111;
             font-weight: 600;
-            text-align: center;  /* Ensure text inside the header is centered */
         }
 
         .hero {
+            position: relative;
+            background: url('https://via.placeholder.com/1600x900') center/cover no-repeat;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
-            padding: 60px 20px;
-            max-width: 1200px;
-            margin: auto;
+            padding: 0 20px;
+            color: #fff;
+        }
+
+        /* Dark overlay on hero section to improve text readability */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: -1;
         }
 
         .hero h2 {
-            font-size: 2rem;
+            font-size: 3rem;
+            color: black;
+            font-weight: 600;
             margin-bottom: 20px;
-            color: #0078ff;
-            font-weight: 500;
+            padding-top: 20px;
         }
 
         .hero p {
-            font-size: 1rem;
+            font-size: 1.2rem;
+            color: black;
             line-height: 1.6;
+            margin-bottom: 40px;
             max-width: 800px;
-            margin: 0 auto 40px;
-            color: #555;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        .highlight {
-            font-weight: bold;
-            color: #0078ff;
-        }
-
-        .hero img {
-            width: 100%;
-            max-width: 600px;
-            height: auto;
-            margin: 30px 0;
-            border-radius: 10px;
-        }
-
-        .store-links {
+        .cta-buttons {
             display: flex;
             gap: 20px;
             justify-content: center;
-            margin-top: 30px;
+            flex-wrap: wrap; /* Allow buttons to wrap on small screens */
         }
 
-        .store-links img {
-            width: 150px;
+        .cta-buttons img {
+            width: 200px; /* Set size of the icons */
             height: auto;
             cursor: pointer;
             transition: transform 0.3s ease;
         }
 
-        .store-links img:hover {
+        .cta-buttons img:hover {
             transform: scale(1.1);
         }
 
+        /* Contact Section */
+        .contact-page {
+            background: #f9f9f9; /* Slightly off-white background for contrast */
+            padding: 80px 20px;
+            text-align: center;
+            color: #333;
+        }
+
+        .contact-page h2 {
+            font-size: 2rem;
+            color: #111;
+            margin-bottom: 20px;
+        }
+
+        .contact-page p {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        .contact-page a {
+            color: #0078ff;
+            text-decoration: underline;
+        }
+
+        /* Footer */
         footer {
-            margin-top: auto;
+            background: #f4f4f4; /* Lighter footer background */
             padding: 20px;
-            background: #ffffff;
-            border-top: 1px solid #ddd;
             text-align: center;
             color: #777;
+        }
+
+        footer p {
             font-size: 0.9rem;
         }
 
@@ -106,62 +149,64 @@
             text-decoration: underline;
         }
 
-        .contact-page {
-            text-align: center;
-            padding: 60px 20px;
-            background: #f1f1f1;
-        }
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            .hero h2 {
+                font-size: 2rem;
+            }
 
-        .contact-page h2 {
-            font-size: 2rem;
-            color: #0078ff;
-            margin-bottom: 20px;
-        }
+            .hero p {
+                font-size: 1rem;
+            }
 
-        .contact-page p {
-            font-size: 1rem;
-            line-height: 1.6;
-            color: #555;
-        }
+            .cta-buttons {
+                flex-direction: column;
+            }
 
-        .contact-page img {
-            width: 100%;
-            max-width: 500px;
-            margin: 30px 0;
-            border-radius: 10px;
+            .cta-buttons img {
+                width: 180px; /* Slightly smaller on mobile */
+                margin-bottom: 20px; /* Space between icons */
+                max-width: 90%; /* Prevent overflow on mobile */
+            }
+
+            /* Prevent App Store Icon from crossing over the next section */
+            .cta-buttons img:last-child {
+                margin-right: 10px; /* Ensure some space on the right */
+            }
+
+            /* Ensure the iOS and Android icons are the same size and don't overflow */
+            .cta-buttons img {
+                max-width: 200px; /* Limit size on mobile */
+            }
         }
     </style>
 </head>
 <body>
+
     <header>
         <h1>Kaloryz</h1>
     </header>
 
-    <main class="hero">
+    <section class="hero">
         <h2>Your Smart Nutrition Assistant</h2>
         <p>
-            Revolutionize your health journey with <span class="highlight">Kaloryz</span>. Track your calories, manage macros, and achieve your fitness goals with the power of AI and built-in chat support. Chat with our AI assistant to get personalized advice, track your food intake, and stay on top of your nutrition.
+            Track your calories, manage macros, and achieve your fitness goals with the power of AI. Chat with our assistant for personalized advice, track your food intake, and stay on top of your nutrition.
         </p>
-
-        <!-- <img src="https://via.placeholder.com/800x400" alt="Kaloryz app interface showing chat functionality"> -->
-
-        <div class="store-links">
+        <div class="cta-buttons">
             <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play Store">
             <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Apple App Store">
         </div>
-    </main>
+    </section>
 
     <section class="contact-page">
         <h2>Contact Us</h2>
         <p>If you have any questions, need support, or want to provide feedback, feel free to reach out to us. We're here to help!</p>
-        <!-- <img src="https://via.placeholder.com/800x400" alt="Customer support"> -->
         <p>Email us at: <a href="mailto:support@kaloryz.com">support@kaloryz.com</a></p>
     </section>
 
     <footer>
-        <p>
-            &copy; 2025 Kaloryz. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
-        </p>
+        <p>&copy; 2025 Kaloryz. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
     </footer>
+
 </body>
 </html>
